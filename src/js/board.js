@@ -1,4 +1,4 @@
-import {ofLength, omit} from 'app/tools/list'
+import {ofLength, omit, indexes} from 'app/tools/list'
 import {randBetween} from 'app/tools/rand'
 import {compose, curry, reduce, concat, lensIndex, set} from 'ramda'
 
@@ -11,10 +11,10 @@ const getByFilter = (test, board) =>
         concat(
             acc,
             reduce((acc, col) =>
-                concat(acc, test(board[row][col]) ? [[Number.parseInt(row), Number.parseInt(col)]] : []),
-            [], Object.keys(board[row]))
+                concat(acc, test(board[row][col]) ? [[row, col]] : []),
+            [], indexes(board[row]))
         ),
-    [], Object.keys(board))
+    [], indexes(board))
 
 export const createEmptyBoard = (width, height) => ofLength(height).map(() => ofLength(width).map(() => emptyVal))
 export const isEmpty = x => x === emptyVal
@@ -38,11 +38,4 @@ export const fillRandom = curry((num, shouldPlace, createUnit, board) => {
     }, ofLength(num))
 
     return result.board
-    // use getByFilter to get possible locations to place
-
-    // pick `num` of those at random and fill
-
-    // be sure not to use same spot twice
-
-    // quick if used all spots, even if haven't reached num
 })
