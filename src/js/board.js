@@ -29,7 +29,7 @@ export const fillRandom = curry((num, shouldPlace, createUnit, board) => {
         console.log(acc, location) // stub
 
         return {
-            board: set(compose(lensIndex(location[0]), lensIndex(location[1])), createUnit(), acc.board),
+            board: set(compose(lensIndex(location[0]), lensIndex(location[1])), acc.board[location[0]][location[1]].concat([createUnit()]), acc.board),
             possibleLocations: omit(locationIndex, acc.possibleLocations),
         }
     }, {
