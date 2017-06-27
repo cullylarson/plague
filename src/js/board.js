@@ -26,8 +26,6 @@ export const fillRandom = curry((num, shouldPlace, createUnit, board) => {
         const locationIndex = randBetween(0, acc.possibleLocations.length - 1)
         const location = acc.possibleLocations[locationIndex]
 
-        console.log(acc, location) // stub
-
         return {
             board: set(compose(lensIndex(location[0]), lensIndex(location[1])), acc.board[location[0]][location[1]].concat([createUnit()]), acc.board),
             possibleLocations: omit(locationIndex, acc.possibleLocations),
