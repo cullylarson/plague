@@ -2,9 +2,17 @@
     <head>
         <title>plague</title>
         <script src="/app.js"></script>
+        <script>
+            window.addEventListener("load", () => {
+                Plague(
+                    document.getElementById('board'),
+                    100,
+                    100
+                )
+            })
+        </script>
     </head>
     <body>
-        <div id='blah'>
-        </div>
+        <canvas id='board' width='700' height='700'></canvas>
     </body>
 </html>

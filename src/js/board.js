@@ -1,6 +1,7 @@
 import {ofLength, omit, indexes} from 'app/tools/list'
 import {randBetween} from 'app/tools/rand'
-import {compose, curry, reduce, concat, lensIndex, set} from 'ramda'
+import {BoardSize} from 'app/tools/containers'
+import {filter, compose, curry, reduce, concat, lensIndex, set} from 'ramda'
 
 const emptyVal = []
 
@@ -20,8 +21,18 @@ const getByFilter = (test, board) =>
         indexes(board)
     )
 
+export const getBoardSize = board => BoardSize(
+    board.length,
+    board.length ? board[0].length : 0
+)
+
+export const hasUnit = (unitTest, space) => filter(unitTest, space).length > 0
+
 export const createEmptyBoard = (width, height) => ofLength(height).map(() => ofLength(width).map(() => emptyVal))
 export const isEmpty = x => x === emptyVal
+
+// fillRandom :: int -> (Object -> Bool) -> (_ -> Object) -> Array -> Array
+// Puts a certain number of units into a board.
 export const fillRandom = curry((num, shouldPlace, createUnit, board) => {
     const result = reduce(
         (acc, _) => {

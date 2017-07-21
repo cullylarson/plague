@@ -2,8 +2,12 @@ import {createEmptyBoard, fillRandom, isEmpty} from 'app/board'
 import {human} from 'app/units'
 import {compose} from 'ramda'
 import {logM} from 'app/tools/debug'
+import {paint} from 'app/painter'
 
-compose(
-    logM('board'),
-    fillRandom(20, isEmpty, human)
-)(createEmptyBoard(100, 100))
+window.Plague = (el, width, height) => {
+    compose(
+        paint(el),
+        logM('board'),
+        fillRandom(20, isEmpty, human)
+    )(createEmptyBoard(width, height))
+}
