@@ -35,4 +35,6 @@ export const paint = curry((el, board) => {
 
         return y + spaceSize.height
     }, 0, board)
+
+    return board
 })
