@@ -1,6 +1,6 @@
 import {Size, Point} from 'app/tools/containers'
 import {getBoardSize, isEmpty, hasUnit} from 'app/board'
-import {isHuman} from 'app/units'
+import {isHuman, isInfected} from 'app/units'
 import {curry, reduce} from 'ramda'
 
 const getSpaceSize = (board, el) => {
@@ -14,7 +14,8 @@ const getSpaceSize = (board, el) => {
 
 const drawSpace = curry((ctx, spaceSize, atPoint, space) => {
     if(isEmpty(space)) ctx.fillStyle = 'black'
-    else if(hasUnit(isHuman, space)) ctx.fillStyle = 'red'
+    else if(hasUnit(isHuman, space)) ctx.fillStyle = 'green'
+    else if(hasUnit(isInfected, space)) ctx.fillStyle = 'red'
 
     ctx.fillRect(atPoint.x, atPoint.y, spaceSize.width, spaceSize.height)
 })
